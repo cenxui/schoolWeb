@@ -1,0 +1,20 @@
+.bulk-submit-button {
+    margin-bottom: 30px !important;
+}
+
+.download-button {
+    margin-right: 30px !important;
+    margin-bottom: 30px !important;
+}
+
+.upload-form {
+    justify-content: center;
+    .upload-input-col {
+        height: 100px;
+        vertical-align: center;
+        .upload-input-container {
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+    }
+}

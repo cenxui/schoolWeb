@@ -1,0 +1,72 @@
+[
+    {
+        "navPath": "/device-directory/300",
+        "icon": "list_alt",
+        "id": "1",
+        "title": "Device Directory",
+        "groups": ["CustomerAdmin", "CustomerViewer", "ResellerAdmin", "ResellerViewer", "SystemAdmin"]
+    },
+    {
+        "navPath": "/provision",
+        "icon": "library_add",
+        "id": "2",
+        "title": "Provision Device",
+        "groups": ["CustomerAdmin", "ResellerAdmin", "SystemAdmin"]
+    },
+    {
+        "navPath": "/bulk-provision",
+        "icon": "cloud_upload",
+        "id": "3",
+        "title": "Bulk Provision",
+        "groups": ["CustomerAdmin", "ResellerAdmin", "SystemAdmin"]
+    },
+    {
+        "navPath": "/add-template",
+        "icon": "note_add",
+        "id": "4",
+        "title": "Add Template",
+        "groups": ["CustomerAdmin", "ResellerAdmin", "SystemAdmin"]
+    },
+    {
+        "navPath": "/template-manager",
+        "icon": "description",
+        "id": "6",
+        "title": "Template Manager",
+        "groups": ["CustomerAdmin", "ResellerAdmin", "SystemAdmin"]
+    },
+    {
+        "navPath": "/add-user",
+        "icon": "person_add",
+        "id": "7",
+        "title": "Add User",
+        "groups": ["CustomerAdmin", "ResellerAdmin", "SystemAdmin"]
+    },
+    {
+        "navPath": "/user-manager",
+        "icon": "group",
+        "id": "5",
+        "title": "User Manager",
+        "groups": ["CustomerAdmin", "ResellerAdmin", "ResellerViewer", "SystemAdmin"]
+    },
+    {
+        "navPath": "/add-org",
+        "icon": "group_add",
+        "id": "8",
+        "title": "Add Organization",
+        "groups": ["ResellerAdmin", "SystemAdmin"]
+    },
+    {
+        "navPath": "/org-manager",
+        "icon": "group_work",
+        "id": "9",
+        "title": "Org Manager",
+        "groups": ["CustomerAdmin", "ResellerAdmin", "ResellerViewer", "SystemAdmin"]
+    },
+    {
+        "navPath": "/job",
+        "icon": "group_work",
+        "id": "10",
+        "title": "Job Manager",
+        "groups": ["CustomerAdmin", "ResellerAdmin", "ResellerViewer", "SystemAdmin"]
+    }
+]

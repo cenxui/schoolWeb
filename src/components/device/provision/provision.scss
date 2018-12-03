@@ -1,0 +1,17 @@
+form {
+    display: flex !important;
+    .input-col {
+        margin-bottom: 25px;
+    }
+    .submit-button-row {
+        float: right;
+        button {
+            margin: 30px;
+        }
+    }
+}
+
+.select-template {
+    width: 95%;
+    margin-top: 25px !important;
+}

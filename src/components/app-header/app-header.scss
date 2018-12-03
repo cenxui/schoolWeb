@@ -1,0 +1,28 @@
+@import '../../styles/_var.scss';
+
+.app-header-container {
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    svg {
+        color: $header-font-color;
+        &.fa-bars {
+            margin-left: 16px;
+        }
+    }
+    img {
+        height: 25px;
+        margin-left: 18px;
+        margin-right: 120px;
+    }
+    h4 {
+        color: $header-font-color;
+        margin: 0px;
+        font-size: 18px;
+        font-weight: 300;
+    }
+}
+
+
+
+
