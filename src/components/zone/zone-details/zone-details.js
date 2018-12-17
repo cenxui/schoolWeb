@@ -1,5 +1,5 @@
 import React from "react";
-import './device-details.scss';
+import './zone-details.scss';
 import Sidenav from '../../sidenav';
 import AppHeader from '../../app-header';
 import { Row, Col } from 'react-flexbox-grid';
@@ -16,12 +16,12 @@ import Button from '@material-ui/core/Button';
 import {withRouter} from 'react-router-dom';
 import Switch from '@material-ui/core/Switch';
 
-class DeviceDetails extends React.Component {
+class ZoneDetails extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            device: {},
+            zone: {},
             telemetry: '',
             certLink: '',
             bluetooth: false,
@@ -32,12 +32,12 @@ class DeviceDetails extends React.Component {
         this.downloadCertificate.bind(this);
         this.handleSwitch.bind(this);
     }
-    
-    
+
+
     componentDidMount = () => {
         let id = this.props.match.params.id;
         let type = this.props.match.params.type;
-        this.getDeviceDetails(id, type)
+        this.getzoneDetails(id, type)
     }
 
     // Gets shadow status
@@ -62,23 +62,23 @@ class DeviceDetails extends React.Component {
         }));
     }
 
-    // Gets devices, sets device state to api result
-    getDeviceDetails(id, type) {
+    // Gets zones, sets zone state to api result
+    getzoneDetails(id, type) {
         API.getDevice(id, type)
         .then(res => res.json()
         .then((res) => {
             console.log(res);
-            this.setState({ 
+            this.setState({
                 device: {
                     deviceId: id,
                     deviceType: res.Item.deviceType.S,
                     frequency: res.Item.frequency.S,
-                    group: res.Item.group.S, 
-                    hardware_model: res.Item.hardware_model.S, 
+                    group: res.Item.group.S,
+                    hardware_model: res.Item.hardware_model.S,
                     host_name: res.Item.host_name.S,
-                    memory: res.Item.memory.S, 
-                    operating_system_name: res.Item.operating_system_name.S, 
-                    operating_system_version: res.Item.operating_system_version.S, 
+                    memory: res.Item.memory.S,
+                    operating_system_name: res.Item.operating_system_name.S,
+                    operating_system_version: res.Item.operating_system_version.S,
                     processor: res.Item.processor.S,
                     region: res.Item.region.S
                 },
@@ -118,9 +118,9 @@ class DeviceDetails extends React.Component {
         let unformattedData = this.state.telemetry
         unformattedData.map(data => {
             return formattedData.push([
-                new Date(parseInt(data.M.timestamp.S) * 1000), 
-                parseFloat(data.M.cpuUsage.N), 
-                parseFloat(data.M.memUsage.N), 
+                new Date(parseInt(data.M.timestamp.S) * 1000),
+                parseFloat(data.M.cpuUsage.N),
+                parseFloat(data.M.memUsage.N),
             ])
         });
         this.setState({
@@ -164,7 +164,7 @@ class DeviceDetails extends React.Component {
             window.open(this.state.edgeUrl);
         }
     }
-        
+
     // converts shadow status 'on' or 'off' to true or false
     convertToBoolean(status, state) {
         let stateObj = {};
@@ -186,7 +186,7 @@ class DeviceDetails extends React.Component {
         );
     };
 
-    // shows 'on' or 'off' in UI instead of true or false 
+    // shows 'on' or 'off' in UI instead of true or false
     formatForOnOff(status) {
         if (status === true) {
             return 'on'
@@ -206,7 +206,7 @@ class DeviceDetails extends React.Component {
         .then(res => res.json())
         .then(res => console.log(res))
     }
-    
+
 
     render () {
         return(
@@ -281,7 +281,7 @@ class DeviceDetails extends React.Component {
                                         }
                                     </List>
                                 </Col>
-                                <Col lg={6}>    
+                                <Col lg={6}>
                                     <List className="details-list">
                                             <ListItem>
                                             <ListItemText primary="Memory" />
@@ -347,8 +347,8 @@ class DeviceDetails extends React.Component {
                         </Paper>
                         {this.state.telemetry !== '' &&
                             <Card className="chart-container main-paper">
-                                <LineChart 
-                                    deviceData={this.state.telemetry} 
+                                <LineChart
+                                    deviceData={this.state.telemetry}
                                     deviceId={this.state.device.deviceId}
                                 ></LineChart>
                             </Card>
@@ -367,4 +367,4 @@ class DeviceDetails extends React.Component {
 
 }
 
-export default withRouter(DeviceDetails);
+export default withRouter(ZoneDetails);

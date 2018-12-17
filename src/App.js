@@ -1,22 +1,13 @@
 import React, {Component} from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
-import BulkProvision from './components/device/bulk-provision';
-import DeviceDetails from './components/device/device-details';
-import DeviceList from './components/device/device-list';
-import Provision from './components/device/provision';
-import AddTemplate from './components/template/add-template';
-import TemplateList from './components/template/template-list';
-import TemplateDetails from './components/template/template-details';
+import DeviceDetails from './components/zone/zone-details';
+import DeviceList from './components/zone/zone-list';
 import AddUser from './components/user/add-user';
 import AddOrg from './components/organization/add-org';
 import OrgDetails from './components/organization/org-details';
 import OrgList from './components/organization/org-list';
 import UserList from './components/user/user-list';
 import ContactAdmin from './components/user/login/contact-admin';
-import JobList from './components/job/job-list';
-import AddJob from './components/job/add-job'
-import AddGroupJob from './components/job/add-group-job'
-import JobDetails from './components/job/job-details'
 import { Auth } from "aws-amplify";
 import AWS from 'aws-sdk';
 
@@ -78,15 +69,6 @@ class App extends Component {
             <Route path="/user-manager" render={()=>(this.checkResellerViewer() ? (<UserList/>) : (<Redirect to='/device-directory/300' />))}/>
             <Route path="/add-org" render={()=>(this.checkAdmins() ? (<AddOrg/>) : (<Redirect to='/device-directory/300' />))} />
             <Route path="/add-user" render={()=>(this.checkOrgAdmin() ? (<AddUser/>) : (<Redirect to='/device-directory/300' />))}/>
-            <Route path="/bulk-provision" render={()=>(this.checkOrgAdmin() ? (<BulkProvision/>) : (<Redirect to='/device-directory/300' />))}/>
-            <Route path="/provision" render={()=>(this.checkOrgAdmin() ? (<Provision/>) : (<Redirect to='/device-directory/300' />))}/>
-            <Route path="/add-template" render={()=>(this.checkOrgAdmin() ? (<AddTemplate/>) : (<Redirect to='/device-directory/300' />))}/>
-            <Route path="/template/:template" render={()=>(this.checkOrgAdmin() ? (<TemplateDetails/>) : (<Redirect to='/device-directory/300' />))}/>
-            <Route path="/template-manager" render={()=>(this.checkOrgAdmin() ? (<TemplateList/>) : (<Redirect to='/device-directory/300' />))}/>
-            <Route path="/job" render={()=>(this.checkAdmins() ? (<JobList/>) : (<Redirect to='/device-directory/300' />))}/>
-            <Route path="/add-job" render={()=>(this.checkAdmins() ? (<AddJob/>) : (<Redirect to='/device-directory/300' />))}/>
-            <Route path="/add-group-job" render={()=>(this.checkAdmins() ? (<AddGroupJob/>) : (<Redirect to='/device-directory/300' />))}/>
-            <Route path="/job-details/:job" render={()=>(this.checkAdmins() ? (<JobDetails/>) : (<Redirect to='/device-directory/300' />))}/>
           </Switch>
         </Router>
       </div>

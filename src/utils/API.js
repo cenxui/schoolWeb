@@ -1,5 +1,7 @@
+import { Auth } from "aws-amplify";
+
 export default {
-  
+
   // ============= DEVICES ============= //
 
   getAllDevices: function (numOfResults) {
@@ -47,7 +49,16 @@ export default {
   // ============= JOBS ============= //
 
   getAllJobs: function () {
-      return fetch('https://j11zl0kmt6.execute-api.us-east-1.amazonaws.com/dev/job');
+      return Auth.currentSession()
+          .then((user)=>{
+              return fetch('https://j11zl0kmt6.execute-api.us-east-1.amazonaws.com/dev/job',
+                  {
+                      method: 'GET',
+                      headers: {
+                          'Authorization': user.idToken.jwtToken,
+                      },
+                  });
+          });
   },
 
   getJob: function (name) {
@@ -73,27 +84,27 @@ export default {
       return fetch('https://j11zl0kmt6.execute-api.us-east-1.amazonaws.com/dev/job/thing');
   },
 
-    // ============= ORGANIZATIONS ============= //
+  // ============= ORGANIZATIONS ============= //
 
-    getAllOrgs: function () {
-      return fetch('https://mqvux6loff.execute-api.us-east-1.amazonaws.com/Dev/organization');
-    },
-  
-    getOrg: function (id) {
-      return fetch('https://mqvux6loff.execute-api.us-east-1.amazonaws.com/Dev/organization/' + id);
-    },
-  
-    addOrg: function (data) {
-      return fetch('https://mqvux6loff.execute-api.us-east-1.amazonaws.com/Dev/organization', 
-      {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-      });
-    },
+  getAllOrgs: function () {
+    return fetch('https://mqvux6loff.execute-api.us-east-1.amazonaws.com/Dev/organization');
+  },
+
+  getOrg: function (id) {
+    return fetch('https://mqvux6loff.execute-api.us-east-1.amazonaws.com/Dev/organization/' + id);
+  },
+
+  addOrg: function (data) {
+    return fetch('https://mqvux6loff.execute-api.us-east-1.amazonaws.com/Dev/organization',
+    {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    });
+  },
 
   
   // ============= EDGE CLIENT / CERTIFICATES ============= //

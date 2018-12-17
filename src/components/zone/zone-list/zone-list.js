@@ -1,5 +1,5 @@
 import React from "react";
-import './device-job.scss';
+import './zone-list.scss';
 import AppHeader from '../../app-header'
 import Sidenav from '../../sidenav';
 import Paper from '@material-ui/core/Paper';
@@ -9,8 +9,7 @@ import MaterialTable from 'material-table';
 import {withRouter} from 'react-router-dom';
 import { Auth } from "aws-amplify";
 
-//todo
-class DeviceJob extends React.Component {
+class ZoneList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -126,6 +125,9 @@ class DeviceJob extends React.Component {
                                         onClick: (event, rowData) => { this.viewDetails(rowData.DeviceID, rowData.DeviceType)}
                                     }
                                 ]}
+                                options={{
+                                    selection: false,
+                                }}
                             />
                         </Paper>
                     </Col>
@@ -136,4 +138,4 @@ class DeviceJob extends React.Component {
 
 }
 
-export default withRouter(DeviceJob);
+export default withRouter(ZoneList);
