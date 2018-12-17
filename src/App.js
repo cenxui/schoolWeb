@@ -1,13 +1,10 @@
 import React, {Component} from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
-import DeviceDetails from './components/zone/zone-details';
-import DeviceList from './components/zone/zone-list';
 import AddUser from './components/user/add-user';
 import AddOrg from './components/organization/add-org';
 import OrgDetails from './components/organization/org-details';
 import OrgList from './components/organization/org-list';
 import UserList from './components/user/user-list';
-import ContactAdmin from './components/user/login/contact-admin';
 import { Auth } from "aws-amplify";
 import AWS from 'aws-sdk';
 
@@ -59,16 +56,13 @@ class App extends Component {
       <div className="App">
         <Router>
           <Switch>
-            {this.state.userGroup === undefined ? <ContactAdmin /> : null }
-            <Redirect exact from="/device-directory" to='/device-directory/300' />
-            <Route exact path="/" render={()=>(this.state.loggedIn ? (<Redirect to='/device-directory/300' />) : (null) )}/>
-            {this.state.loggedIn ? <Route path="/device-directory/:dataLength" component={DeviceList}/> : null}
-            {this.state.loggedIn ? <Route path="/device/:id/:type" component={DeviceDetails} /> : null}
-            <Route path="/org-manager" render={()=>(this.checkResellerViewer() ? (<OrgList/>) : (<Redirect to='/device-directory/300' />))}/>
-            <Route path="/org-details" render={()=>(this.checkOrgAdmin() ? (<OrgDetails/>) : (<Redirect to='/device-directory/300' />))}/>
-            <Route path="/user-manager" render={()=>(this.checkResellerViewer() ? (<UserList/>) : (<Redirect to='/device-directory/300' />))}/>
-            <Route path="/add-org" render={()=>(this.checkAdmins() ? (<AddOrg/>) : (<Redirect to='/device-directory/300' />))} />
-            <Route path="/add-user" render={()=>(this.checkOrgAdmin() ? (<AddUser/>) : (<Redirect to='/device-directory/300' />))}/>
+            <Route exact path="/" render={()=>(this.state.loggedIn ? (<Redirect to='/index' />) : (null) )}/>
+            <Route path="/org-manager" render={()=>(this.checkResellerViewer() ? (<OrgList/>) : (<Redirect to='/index' />))}/>
+            <Route path="/org-details" render={()=>(this.checkOrgAdmin() ? (<OrgDetails/>) : (<Redirect to='/index' />))}/>
+            <Route path="/user-manager" render={()=>(this.checkResellerViewer() ? (<UserList/>) : (<Redirect to='/index' />))}/>
+            <Route path="/add-org" render={()=>(this.checkAdmins() ? (<AddOrg/>) : (<Redirect to='/index' />))} />
+            <Route path="/add-user" render={()=>(this.checkOrgAdmin() ? (<AddUser/>) : (<Redirect to='/index' />))}/>
+            <Route path="/index"/>
           </Switch>
         </Router>
       </div>

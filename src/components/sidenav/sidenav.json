@@ -1,12 +1,5 @@
 [
     {
-        "navPath": "/device-directory/300",
-        "icon": "list_alt",
-        "id": "1",
-        "title": "Device Directory",
-        "groups": ["CustomerAdmin", "CustomerViewer", "ResellerAdmin", "ResellerViewer", "SystemAdmin"]
-    },
-    {
         "navPath": "/add-user",
         "icon": "person_add",
         "id": "7",
