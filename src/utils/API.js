@@ -1,27 +1,80 @@
 export default {
 
-  // ============= Zone ============= //
+  // ============= Zones ============= //
 
-  getAllZones: function (numOfResults) {
-    return fetch('https://b87wrelcj3.execute-api.us-east-1.amazonaws.com/Dev/device/?limit=' + numOfResults);
-  },
+    getAllZones: function (numOfResults) {
+    return fetch('https://todo?limit=' + numOfResults);
+    },
 
-  getZone: function (id, type) {
-    return fetch('https://b87wrelcj3.execute-api.us-east-1.amazonaws.com/Dev/device/' + id + '?deviceType=' + type);
-  },
+    getZone: function (id, type) {
+    return fetch('https://todo' + id + '?deviceType=' + type);
+    },
 
-  // ============= ORGANIZATIONS ============= //
+    addZone: function (numOfResults) {
+      return fetch('https://todo?limit=' + numOfResults);
+    },
 
-  getAllOrgs: function () {
-    return fetch('https://mqvux6loff.execute-api.us-east-1.amazonaws.com/Dev/organization');
-  },
+    editZone: function (id, type) {
+      return fetch('https://todo' + id + '?deviceType=' + type);
+    },
 
-  getOrg: function (id) {
-    return fetch('https://mqvux6loff.execute-api.us-east-1.amazonaws.com/Dev/organization/' + id);
-  },
+    deleteZone: function (id, type) {
+      return fetch('https://todo' + id + '?deviceType=' + type);
+    },
 
-  addOrg: function (data) {
-    return fetch('https://mqvux6loff.execute-api.us-east-1.amazonaws.com/Dev/organization',
+    // ============= Zone Templates ============= //
+
+    getAllZoneTemplates: function (numOfResults) {
+        return fetch('https://todo?limit=' + numOfResults);
+    },
+
+    getZoneTemplate: function (id, type) {
+        return fetch('https://todo' + id + '?deviceType=' + type);
+    },
+
+    addZoneTemplate: function (numOfResults) {
+        return fetch('https://todo?limit=' + numOfResults);
+    },
+
+    deleteZoneTemplate: function (id, type) {
+        return fetch('https://todo' + id + '?deviceType=' + type);
+    },
+
+    // ============= BookedPosition ============= //
+
+    getAllBookedPositions: function (numOfResults) {
+        return fetch('https://todo?limit=' + numOfResults);
+    },
+
+    getBookedPosition: function (id, type) {
+        return fetch('https://todo' + id + '?deviceType=' + type);
+    },
+
+    addBookedPosition: function (numOfResults) {
+        return fetch('https://todo?limit=' + numOfResults);
+    },
+
+    editBookedPosition: function (id, type) {
+        return fetch('https://todo' + id + '?deviceType=' + type);
+    },
+
+    deleteBookedPosition: function (id, type) {
+        return fetch('https://todo' + id + '?deviceType=' + type);
+    },
+
+
+    // ============= ORGANIZATIONS ============= //
+
+    getAllOrgs: function () {
+    return fetch('index');
+    },
+
+    getOrg: function (id) {
+    return fetch('https://todo/' + id);
+    },
+
+    addOrg: function (data) {
+    return fetch('https://todo',
     {
       method: 'POST',
       headers: {
@@ -30,20 +83,32 @@ export default {
       },
       body: JSON.stringify(data)
     });
-  },
+    },
 
-  // ============= USER ============= //
+    editOrg: function (data) {
+      return fetch('https://todo',
+          {
+              method: 'POST',
+              headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(data)
+          });
+    },
 
-  getAllUsers: function (query) {
-    return fetch('https://h1nteztqp0.execute-api.us-east-1.amazonaws.com/Dev/user');
-  },
+    // ============= USER ============= //
 
-  getUser: function (email) {
-    return fetch('https://h1nteztqp0.execute-api.us-east-1.amazonaws.com/Dev/user' + email);
-  },
+    getAllUsers: function (query) {
+    return fetch('https://todo');
+    },
 
-  addUser: function (data) {
-    return fetch('https://h1nteztqp0.execute-api.us-east-1.amazonaws.com/Dev/user',
+    getUser: function (email) {
+    return fetch('https://todo' + email);
+    },
+
+    addUser: function (data) {
+    return fetch('https://todo',
     {
       method: 'POST',
       headers: {
@@ -52,6 +117,17 @@ export default {
       },
       body: JSON.stringify(data)
     })
-  }
+    },
 
+    editUser: function (data) {
+      return fetch('https://todo',
+          {
+              method: 'POST',
+              headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(data)
+          })
+    }
 }
