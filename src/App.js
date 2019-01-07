@@ -5,11 +5,11 @@ import AddOrg from './components/organization/add-org';
 import OrgDetails from './components/organization/org-details';
 import OrgList from './components/organization/org-list';
 import UserList from './components/user/user-list';
-import { Auth } from "aws-amplify";
-import AWS from 'aws-sdk';
+import Index from './components/index/index-details'
+import Auth from './auth/Auth'
+import Sidenav from './components/sidenav';
 
 import './styles/App.scss';
-
 
 class App extends Component {
   constructor(props){
@@ -20,7 +20,6 @@ class App extends Component {
       isAuthenticated: false,
       isAuthenticating: true
     }
-    AWS.config.region = 'us-east-1';
   }
   componentWillMount(){
     this.userAuth();
@@ -32,22 +31,23 @@ class App extends Component {
     this.setState({ isAuthenticated: authenticated });
   }
   async userAuth(){
-    await Auth.currentSession()
-    .then((user)=>{
-      this.setState({userGroup: user.accessToken.payload['cognito:groups'], loggedIn: true});
-      this.userHasAuthenticated(true);
-      console.log(user)
-    });
+    if (Auth.isUserSignedIn()) {
+        this.setState({userGroup: 'SystemAdmin', loggedIn: true});
+    }
+
     this.setState({ isAuthenticating: false });
   }
   checkAdmins(){
-    return this.state.userGroup.some((item)=>{return item === "ResellerAdmin" || item === "SystemAdmin"})
+    return true;
+    // return this.state.userGroup.some((item)=>{return item === "ResellerAdmin" || item === "SystemAdmin"})
   }
   checkOrgAdmin(){
-    return this.state.userGroup.some((item)=>{return item === "ResellerAdmin" || item === "SystemAdmin" || item === "CustomerAdmin"})
+    return true;
+    // return this.state.userGroup.some((item)=>{return item === "ResellerAdmin" || item === "SystemAdmin" || item === "CustomerAdmin"})
   }
   checkResellerViewer(){
-    return this.state.userGroup.some((item)=>{return item === "ResellerAdmin" || item === "SystemAdmin" || item === "CustomerAdmin" || item === "ResellerViewer"})
+    return true;
+    // return this.state.userGroup.some((item)=>{return item === "ResellerAdmin" || item === "SystemAdmin" || item === "CustomerAdmin" || item === "ResellerViewer"})
   }
 
   render(){
@@ -56,13 +56,13 @@ class App extends Component {
       <div className="App">
         <Router>
           <Switch>
-            <Route exact path="/" render={()=>(this.state.loggedIn ? (<Redirect to='/index' />) : (null) )}/>
+            <Route path="/" exact render={()=> <Redirect to='/index' />}/>
             <Route path="/org-manager" render={()=>(this.checkResellerViewer() ? (<OrgList/>) : (<Redirect to='/index' />))}/>
             <Route path="/org-details" render={()=>(this.checkOrgAdmin() ? (<OrgDetails/>) : (<Redirect to='/index' />))}/>
             <Route path="/user-manager" render={()=>(this.checkResellerViewer() ? (<UserList/>) : (<Redirect to='/index' />))}/>
             <Route path="/add-org" render={()=>(this.checkAdmins() ? (<AddOrg/>) : (<Redirect to='/index' />))} />
             <Route path="/add-user" render={()=>(this.checkOrgAdmin() ? (<AddUser/>) : (<Redirect to='/index' />))}/>
-            <Route path="/index"/>
+            <Route path="/index" render={() => <Index/>}/>
           </Switch>
         </Router>
       </div>

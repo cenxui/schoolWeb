@@ -9,8 +9,7 @@ import API from '../../../utils/API';
 import MaterialTable from 'material-table';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
-import { Auth } from "aws-amplify";
-
+import Auth from "../../../auth/Auth";
 
 class OrgList extends React.Component {
     constructor(props) {
@@ -34,11 +33,11 @@ class OrgList extends React.Component {
     }
 
     userAuth(){
-        Auth.currentSession()
-        .then((user)=>{
-            this.setState({userRole: user.idToken.payload['cognito:groups'], userOrg: user.idToken.payload['custom:org']})
-            console.log('state', this.state)
-        })
+
+        if (Auth.isUserSignedIn()) {
+            this.userHasAuthenticated(true);
+            this.setState({userRole: 'SystemAdmin', userOrg: 'Org'})
+        }
     }
 
     formatData = (orgs) => {

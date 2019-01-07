@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 import { SideNav, Nav } from 'react-sidenav';
 import sidenavItems from './sidenav.json';
 import MaterialIcon from 'material-icons-react';
-import { Auth } from "aws-amplify";
 import {withRouter} from 'react-router-dom';
+import Auth from "../../auth/Auth";
 
 class Sidenav extends Component {
     constructor(props){
@@ -16,23 +16,22 @@ class Sidenav extends Component {
     }
     componentWillMount() {
         this.userAuth();
-        this.setState({ isAuthenticating: false });
+        this.setState({ isAuthenticating: true });
     }
     componentWillReceiveProps(){
         this.userAuth();
     }
     async userAuth(){
-        await Auth.currentSession()
-        .then((user)=>{
-            this.setState({userGroup: user.accessToken.payload['cognito:groups']});
-        });
+        if (Auth.isUserSignedIn()) {
+            this.setState({userGroup: 'SystemAdmin'});
+        }
     }
 
     render(){
         return(
             <SideNav defaultSelectedPath="1">
                 {sidenavItems.map(sidenavItem => {
-                    if(sidenavItem.groups.includes(this.state.userGroup[0])){
+                    // if(sidenavItem.groups.includes(this.state.userGroup[0])){
                         return (
                             <Nav id={sidenavItem.id} key={sidenavItem.id}>
                                 <Link to={sidenavItem.navPath} className="nav-item">
@@ -41,7 +40,7 @@ class Sidenav extends Component {
                                 </Link>
                             </Nav>
                         );
-                    }
+                    // }
                 })}
             </SideNav>
         )

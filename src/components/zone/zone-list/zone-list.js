@@ -7,7 +7,6 @@ import { Row, Col } from 'react-flexbox-grid';
 import API from '../../../utils/API';
 import MaterialTable from 'material-table';
 import {withRouter} from 'react-router-dom';
-import { Auth } from "aws-amplify";
 
 class ZoneList extends React.Component {
     constructor(props) {
@@ -39,21 +38,21 @@ class ZoneList extends React.Component {
     }
 
     async userAuth(){
-        await Auth.currentSession()
-        .then((user)=>{
-            this.setState({userRole: user.idToken.payload['cognito:groups'], userOrg: user.idToken.payload['custom:org']})
-            if(this.state.userOrg !== "All"){
-            API.getOrg(this.state.userOrg)
-            .then(res => res.json()
-            .then((res) => {
-                // console.info(res)
-                // if(res.Item.Children !== undefined){
-                // this.setState({childOrg: res.Item.Children.SS})
-                // console.log('user org', this.state.userOrg)
-                // this.setState({ isAuthenticating: false });}
-            }))}
-            this.setState({ isAuthenticating: false });
-        })
+        // await Auth.currentSession()
+        // .then((user)=>{
+        //     this.setState({userRole: user.idToken.payload['cognito:groups'], userOrg: user.idToken.payload['custom:org']})
+        //     if(this.state.userOrg !== "All"){
+        //     API.getOrg(this.state.userOrg)
+        //     .then(res => res.json()
+        //     .then((res) => {
+        //         // console.info(res)
+        //         // if(res.Item.Children !== undefined){
+        //         // this.setState({childOrg: res.Item.Children.SS})
+        //         // console.log('user org', this.state.userOrg)
+        //         // this.setState({ isAuthenticating: false });}
+        //     }))}
+        //     this.setState({ isAuthenticating: false });
+        // })
     }
 
     filterDeviceData(deviceList){

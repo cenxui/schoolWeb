@@ -9,8 +9,7 @@ import API from '../../../utils/API';
 import MaterialTable from 'material-table';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
-import { Auth } from "aws-amplify";
-import { filter } from "rsvp";
+import Auth from "../../../auth/Auth";
 
 
 class UserList extends React.Component {
@@ -36,20 +35,23 @@ class UserList extends React.Component {
         .catch(err => alert(err))
     }
     async userAuth(){
-        await Auth.currentSession()
-        .then((user)=>{
-            this.setState({userRole: user.idToken.payload['cognito:groups'], userOrg: user.idToken.payload['custom:org']})
+
+        if (Auth.isUserSignedIn()) {
+            //todo
+            this.setState({userGroup: 'SystemAdmin', loggedIn: true});
+
+            this.setState({userRole: 'SystemAdmin', userOrg: 'Org'})
             if(this.state.userOrg !== "All"){
-            API.getOrg(this.state.userOrg)
-            .then(res => res.json()
-            .then((res) => {
-                console.log('res', res)
-                if(res.Item.Children !== undefined){
-                this.setState({childOrg: res.Item.Children.SS})
-                this.setState({ isAuthenticating: false });}
-            }))}
+                API.getOrg(this.state.userOrg)
+                    .then(res => res.json()
+                        .then((res) => {
+                            console.log('res', res)
+                            if(res.Item.Children !== undefined){
+                                this.setState({childOrg: res.Item.Children.SS})
+                                this.setState({ isAuthenticating: false });}
+                        }))}
             this.setState({ isAuthenticating: false });
-        })
+        }
     }
 
     formatData = (users) => {
