@@ -8,45 +8,98 @@
     <link rel="manifest" href="./manifest.json">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="./amazon-cognito-auth.min.js"></script>
-    <script>
-
-        //todo
-        let authData = {
-            ClientId : '4crf49iqi0t43j0t1u7h71tn4', // Your client id here
-            AppWebDomain :  'school.auth.ap-northeast-1.amazoncognito.com',
-            TokenScopesArray : ['phone', 'email', 'profile','openid', 'aws.cognito.signin.user.admin'], // e.g.['phone', 'email', 'profile','openid', 'aws.cognito.signin.user.admin'],
-            RedirectUriSignIn : 'http://localhost:3000',
-            RedirectUriSignOut : 'http://localhost:3000',
-            UserPoolId : 'ap-northeast-1_ABBytG87Z', // Your user pool id here
-            AdvancedSecurityDataCollectionFlag : true, // e.g. true
-            // Storage: '<TODO the storage object>' // OPTIONAL e.g. new CookieStorage(), to use the specified storage provided
-        };
-
-        var auth = new AmazonCognitoIdentity.CognitoAuth(authData);
-
-        auth.userhandler = {
-            onSuccess: function(result) {
-                console.info("Sign in success");
-            },
-            onFailure: function(err) {
-                console.info("Error!");
-            }
-        };
-
-        // The default response_type is "token", make it be "code for Authorization code process".
-        auth.useCodeGrantFlow();
-
-        let curUrl = window.location.href;
-        auth.parseCognitoWebResponse(curUrl);
-
-        function getAuth() {
-            return auth;
-        }
-
-    </script>
     <title>Booking UI</title>
+    <style>
+      .login {
+        color: black;
+      }
+
+      .login:hover {
+        color: darkgrey;
+      }
+
+      /* phone version æ‰‹æ©Ÿç‰ˆ */
+      @media only screen and (max-device-width: 1024px) {
+        .login {
+          min-width: 150px;
+          margin-right: 15px;
+          margin-top: 20px;
+          margin-left: 5px;
+        }
+      }
+    </style>
+
   </head>
   <body>
+  <div id="id_header">
+    <div class="header">
+      <div id="nav" class="clearfix">
+        <ul class="right clearfix">
+          <li><a class="login" id="signInButton" href="javascript:void(0)" title="Sign in"
+                 style="float: right"
+                 onclick="userButton()">signIn</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+      let authData = {
+          ClientId : '4crf49iqi0t43j0t1u7h71tn4', // Your client id here
+          AppWebDomain :  'school.auth.ap-northeast-1.amazoncognito.com',
+          TokenScopesArray : ['phone', 'email', 'profile','openid', 'aws.cognito.signin.user.admin'], // e.g.['phone', 'email', 'profile','openid', 'aws.cognito.signin.user.admin'],
+          RedirectUriSignIn : 'http://localhost:3000',
+          RedirectUriSignOut : 'http://localhost:3000',
+          UserPoolId : 'ap-northeast-1_ABBytG87Z', // Your user pool id here
+          AdvancedSecurityDataCollectionFlag : true, // e.g. true
+      };
+
+      let auth = new AmazonCognitoIdentity.CognitoAuth(authData);
+
+      auth.userhandler = {
+          onSuccess: function(result) {
+              showSignedIn();
+          },
+          onFailure: function(err) {
+              showSignedOut();
+          }
+      };
+
+      auth.useCodeGrantFlow();
+
+      if (auth.getCurrentUser()!== null && auth.getCurrentUser() !== '')  {
+          //todo possibly user exists but not signin
+          showSignedIn();
+      }else {
+          showSignedOut();
+      }
+
+      let curUrl = window.location.href;
+      auth.parseCognitoWebResponse(curUrl);
+
+      // Perform user operations.
+      function userButton(e) {
+          if (auth.isUserSignedIn()) {
+              document.getElementById("signInButton").innerHTML = 'signIn';
+              auth.signOut();
+              showSignedOut();
+          } else {
+              auth.getSession();
+          }
+      }
+
+      // Operations when signed in.
+      function showSignedIn() {
+          console.info("show signed in");
+          document.getElementById("signInButton").innerHTML = 'signOut';
+      }
+
+      function showSignedOut() {
+          console.info("show signed out");
+          document.getElementById("signInButton").innerHTML = 'signIn';
+      }
+  </script>
     <div id="root"></div>
   </body>
 </html>

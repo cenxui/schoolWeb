@@ -1,6 +1,6 @@
 import React from "react";
 import './login.scss';
-import { Auth } from "aws-amplify";
+// import { Auth } from "aws-amplify";
 import { Row, Col } from 'react-flexbox-grid';
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
@@ -29,16 +29,16 @@ class Login extends React.Component {
     }
 
     handleSubmit = async event => {
-        event.preventDefault();
-        const data = new FormData(event.target.value);
-        console.log(data);
-        try {
-            await Auth.signIn(this.state.email, this.state.password);
-            this.props.userHasAuthenticated(true);
-        } catch (e) {
-            console.log(e.message);
-        }
-        this.props.history.push('/device-directory', { email: 'state' });
+        // event.preventDefault();
+        // const data = new FormData(event.target.value);
+        // console.log(data);
+        // try {
+        //     await Auth.signIn(this.state.email, this.state.password);
+        //     this.props.userHasAuthenticated(true);
+        // } catch (e) {
+        //     console.log(e.message);
+        // }
+        // this.props.history.push('/device-directory', { email: 'state' });
     }
 
     render () {

@@ -9,7 +9,6 @@ import API from '../../../utils/API';
 import MaterialTable from 'material-table';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
-import Auth from "../../../auth/Auth";
 
 class OrgList extends React.Component {
     constructor(props) {
@@ -34,10 +33,8 @@ class OrgList extends React.Component {
 
     userAuth(){
 
-        if (Auth.isUserSignedIn()) {
-            this.userHasAuthenticated(true);
-            this.setState({userRole: 'SystemAdmin', userOrg: 'Org'})
-        }
+        this.userHasAuthenticated(true);
+        this.setState({userRole: 'SystemAdmin', userOrg: 'Org'})
     }
 
     formatData = (orgs) => {

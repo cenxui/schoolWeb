@@ -6,8 +6,6 @@ import OrgDetails from './components/organization/org-details';
 import OrgList from './components/organization/org-list';
 import UserList from './components/user/user-list';
 import Index from './components/index/index-details'
-import Auth from './auth/Auth'
-import Sidenav from './components/sidenav';
 
 import './styles/App.scss';
 
@@ -31,9 +29,7 @@ class App extends Component {
     this.setState({ isAuthenticated: authenticated });
   }
   async userAuth(){
-    if (Auth.isUserSignedIn()) {
-        this.setState({userGroup: 'SystemAdmin', loggedIn: true});
-    }
+      this.setState({userGroup: 'SystemAdmin', loggedIn: true});
 
     this.setState({ isAuthenticating: false });
   }

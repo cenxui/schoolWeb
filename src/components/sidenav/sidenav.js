@@ -5,7 +5,6 @@ import { SideNav, Nav } from 'react-sidenav';
 import sidenavItems from './sidenav.json';
 import MaterialIcon from 'material-icons-react';
 import {withRouter} from 'react-router-dom';
-import Auth from "../../auth/Auth";
 
 class Sidenav extends Component {
     constructor(props){
@@ -22,9 +21,7 @@ class Sidenav extends Component {
         this.userAuth();
     }
     async userAuth(){
-        if (Auth.isUserSignedIn()) {
-            this.setState({userGroup: 'SystemAdmin'});
-        }
+        this.setState({userGroup: 'SystemAdmin'});
     }
 
     render(){
