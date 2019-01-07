@@ -1,7 +1,6 @@
 import React from "react";
 import './org-details.scss';
 import Sidenav from '../../sidenav';
-import AppHeader from '../../app-header';
 import { Row, Col } from 'react-flexbox-grid';
 import Paper from '@material-ui/core/Paper';
 import List from '@material-ui/core/List';
@@ -28,7 +27,7 @@ class TemplateDetails extends React.Component {
             },
         }
     }
-    
+
     // Gets orgs, sets org state to api get result
     componentDidMount() {
         let name = this.props.match.params.name;
@@ -36,7 +35,7 @@ class TemplateDetails extends React.Component {
         .then(res => res.json()
         .then((res) => {
             console.log(res);
-            this.setState({ 
+            this.setState({
                 org: {
                     orgName: res.Item.orgName.S,
                     orgId: res.Item.orgId.S,
@@ -51,11 +50,10 @@ class TemplateDetails extends React.Component {
         console.log(err);
         }));
     }
-    
+
     render () {
         return(
             <div className="app-container">
-                <AppHeader />
                 <Row lg={12}>
                     <Col lg={2} className="sidenav-container">
                         <Sidenav />
@@ -86,10 +84,10 @@ class TemplateDetails extends React.Component {
                                                 <ListItemSecondaryAction>
                                                     {this.state.org.orgType}
                                                 </ListItemSecondaryAction>
-                                            </ListItem>                                            
+                                            </ListItem>
                                         </List>
                                     </Col>
-                                    <Col lg={6}>    
+                                    <Col lg={6}>
                                         <List className="details-list">
                                             <ListItem>
                                                 <ListItemText primary="Device Type" />

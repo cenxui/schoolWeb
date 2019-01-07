@@ -1,6 +1,5 @@
 import React from "react";
 import './zone-list.scss';
-import AppHeader from '../../app-header'
 import Sidenav from '../../sidenav';
 import Paper from '@material-ui/core/Paper';
 import { Row, Col } from 'react-flexbox-grid';
@@ -100,7 +99,6 @@ class ZoneList extends React.Component {
         return(
             !this.state.isAuthenticating &&
             <div className="app-container">
-                <AppHeader />
                 <Row lg={12}>
                     <Col lg={2} className="sidenav-container">
                         <Sidenav />

@@ -1,5 +1,4 @@
 import React from "react";
-import AppHeader from '../../app-header';
 import Sidenav from '../../sidenav';
 import './org-list.scss';
 import Paper from '@material-ui/core/Paper';
@@ -78,7 +77,6 @@ class OrgList extends React.Component {
     render () {
         return(
             <div className="app-container">
-                <AppHeader />
                 <Row lg={12}>
                     <Col lg={2} className="sidenav-container">
                         <Sidenav />

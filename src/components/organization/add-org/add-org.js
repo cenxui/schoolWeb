@@ -1,5 +1,4 @@
 import React from "react";
-import AppHeader from '../../app-header';
 import Sidenav from '../../sidenav';
 import './add-org.scss';
 import Paper from '@material-ui/core/Paper';
@@ -33,7 +32,7 @@ class AddOrg extends React.Component {
         const target = event.target;
         const value = target.value;
         const name = target.name;
-        this.setState({ 
+        this.setState({
             org: {...this.state.org,
                 [name]: value
             }
@@ -84,7 +83,6 @@ class AddOrg extends React.Component {
     render () {
         return(
             <div className="app-container">
-                <AppHeader />
                 <Row lg={12}>
                     <Col lg={2} className="sidenav-container">
                         <Sidenav />
@@ -125,7 +123,7 @@ class AddOrg extends React.Component {
                                             margin="normal"
                                         />
                                     </Col>
-                                    <Col lg={4} className="input-col">    
+                                    <Col lg={4} className="input-col">
                                         <TextField
                                             name="orgType"
                                             label="Org Type"

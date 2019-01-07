@@ -1,5 +1,4 @@
 import React from "react";
-import AppHeader from '../../app-header';
 import Sidenav from '../../sidenav';
 import './add-user.scss';
 import { Row, Col } from 'react-flexbox-grid';
@@ -149,7 +148,6 @@ class AddUser extends React.Component {
     render () {
         return(
             <div className="app-container">
-                <AppHeader />
                 <Row lg={12}>
                     <Col lg={2} className="sidenav-container">
                         <Sidenav />

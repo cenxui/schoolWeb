@@ -44,7 +44,6 @@ class Login extends React.Component {
     render () {
         return(
             <div className="app-container">
-                {/* <AppHeader /> */}
                 <Row lg={6}>
                     <Paper className="main-paper login-container">
                         <form onSubmit={this.handleSubmit}>

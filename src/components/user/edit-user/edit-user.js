@@ -1,5 +1,4 @@
 import React from "react";
-import AppHeader from '../../app-header';
 import Sidenav from '../../sidenav';
 import './add-user.scss';
 import { Row, Col } from 'react-flexbox-grid';
@@ -33,7 +32,7 @@ class EditUser extends React.Component {
         const target = event.target;
         const value = target.value;
         const name = target.name;
-        this.setState({ 
+        this.setState({
           [name]: value
         });
     }
@@ -49,7 +48,6 @@ class EditUser extends React.Component {
     render () {
         return(
             <div className="app-container">
-                <AppHeader />
                 <Row lg={12}>
                     <Col lg={2} className="sidenav-container">
                         <Sidenav />
@@ -104,7 +102,7 @@ class EditUser extends React.Component {
                                             onChange={this.handleChange}
                                             margin="normal"
                                         />
-                                        
+
                                         <Select
                                             name="userRole"
                                             value={this.state.value}

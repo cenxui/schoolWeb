@@ -1,7 +1,6 @@
 import React from "react";
 import './index-details.scss';
 import Sidenav from '../../sidenav';
-import AppHeader from '../../app-header';
 import { Row, Col } from 'react-flexbox-grid';
 import Paper from '@material-ui/core/Paper';
 import List from '@material-ui/core/List';
@@ -25,7 +24,6 @@ class IndexDetails extends React.Component {
     render () {
         return(
             <div className="app-container">
-                <AppHeader />
                 <Row lg={12}>
                     <Col lg={2} className="sidenav-container">
                         <Sidenav />

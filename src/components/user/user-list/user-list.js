@@ -1,5 +1,4 @@
 import React from "react";
-import AppHeader from '../../app-header';
 import Sidenav from '../../sidenav';
 import './user-list.scss';
 import Paper from '@material-ui/core/Paper';
@@ -93,7 +92,6 @@ class UserList extends React.Component {
         return(
             !this.state.isAuthenticating &&
             <div className="app-container">
-                <AppHeader />
                 <Row lg={12}>
                     <Col lg={2} className="sidenav-container">
                         <Sidenav />
